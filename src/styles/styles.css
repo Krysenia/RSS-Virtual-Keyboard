@@ -61,6 +61,7 @@ textarea {
   color: white;
   font-weight: bold;
   box-shadow: 0px 3px #509a559c;
+  cursor: pointer;
 }
 
 .keyboard-key:hover {
