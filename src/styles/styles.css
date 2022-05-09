@@ -1,0 +1,92 @@
+@import 'nunito.css';
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  max-width: 100%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+h2 {
+  font-size: 2.2em;
+  color: #004134;
+  text-shadow: 1px 2px 1px #94ff00;
+}
+
+textarea {
+  width: 900px;
+  height: 200px;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #114021;
+  overflow: auto;
+  line-height: 1.2;
+  border: 1px solid #114021;
+  letter-spacing: -0.5px;
+}
+
+.keyboard-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 1000px;
+  max-width: 100%;
+  min-width: 960px;
+  color: #004134;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: #004134;
+  border-radius: 20px;
+}
+
+.keyboard-key {
+  display: block;
+  text-indent: 10px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #004134;
+  border-radius: 17px;
+  margin: 3px;
+  padding: 3px;
+  font-size: 20px;
+  background-color: #33675d;
+  color: white;
+  font-weight: bold;
+}
+
+.Backspace {
+  width: 134px;
+}
+.Tab {
+  width: 70px;
+}
+.CapsLk {
+  width: 90px;
+}
+.Enter {
+  width: 158px;
+}
+.Shift {
+  width: 124px;
+}
+.Ctrl,
+.Win {
+  width: 60px;
+}
+.Space {
+  width: 424px;
+}
+
+.language {
+  font-weight: bold;
+  color: #114021;
+  margin: 12px 0 0;
+}
