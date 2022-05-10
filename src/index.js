@@ -1,13 +1,6 @@
 // Import styles
 import './styles/styles.css';
 
-// const keyboard = [];
-// document.onkeypress = function eventKey(event) {
-//   //   console.log(event);
-//   keyboard.push(event.charCode);
-//   console.log(keyboard);
-// };
-
 // Create container
 const container = document.createElement('div');
 container.className = 'container';
@@ -74,30 +67,30 @@ function drawKeyboard() {
     'KeyM',
     'Comma',
     'Period',
-    'Unknown',
+    'Slash',
     'Space',
   ];
 
   let out = '';
   for (let i = 0; i < keyboard.length; i++) {
     if (i === 13) {
-      out += '<div class="keyboard-key Backspace"><span>Backspace</span></div>';
+      out += '<div class="keyboard-key Backspace"><span>⌫ Backspace</span></div>';
       out += '<div class="keyboard-key Tab"><span>⭾ Tab</span></div>';
     }
     if (i === 26) {
-      out += '<div class="keyboard-key Del"><span>Del</span></div>';
-      out += '<div class="keyboard-key CapsLk"><span>CapsLk</span></div>';
+      out += '<div class="keyboard-key Delete"><span>Del</span></div>';
+      out += '<div class="keyboard-key CapsLock"><span>CapsLk</span></div>';
     }
     if (i === 37) {
       out += '<div class="keyboard-key Enter"><span>↵ Enter</span></div>';
-      out += '<div class="keyboard-key Shift"><span>Shift</span></div>';
+      out += '<div class="keyboard-key ShiftLeft"><span>⇧ Shift</span></div>';
     }
     if (i === 47) {
-      out += '<div class="keyboard-key PgUp"><span>🡱</span></div>';
-      out += '<div class="keyboard-key Shift"><span>Shift</span></div>';
-      out += '<div class="keyboard-key Ctrl"><span>Ctrl</span></div>';
-      out += '<div class="keyboard-key Win"><span>Win</span></div>';
-      out += '<div class="keyboard-key Alt"><span>Alt</span></div>';
+      out += '<div class="keyboard-key ArrowUp"><span>🡱</span></div>';
+      out += '<div class="keyboard-key ShiftRight"><span>⇧ Shift</span></div>';
+      out += '<div class="keyboard-key ControlLeft"><span>Ctrl</span></div>';
+      out += '<div class="keyboard-key MetaLeft"><span>Win</span></div>';
+      out += '<div class="keyboard-key AltLeft"><span>Alt</span></div>';
     }
     out +=
       '<div class="keyboard-key ' +
@@ -108,12 +101,30 @@ function drawKeyboard() {
       String.fromCharCode(keyboard[i]) +
       '</div>';
   }
-  out += '<div class="keyboard-key Alt"><span>Alt</span></div>';
-  out += '<div class="keyboard-key PgLeft"><span>🡰</span></div>';
-  out += '<div class="keyboard-key PgDn"><span>🡳</span></div>';
-  out += '<div class="keyboard-key PgRight"><span>🡲</span></div>';
-  out += '<div class="keyboard-key Ctrl "><span>Ctrl</span></div>';
+  out += '<div class="keyboard-key AltRight"><span>Alt</span></div>';
+  out += '<div class="keyboard-key ArrowLeft"><span>🡰</span></div>';
+  out += '<div class="keyboard-key ArrowDown"><span>🡳</span></div>';
+  out += '<div class="keyboard-key ArrowRight"><span>🡲</span></div>';
+  out += '<div class="keyboard-key ControlRight"><span>Ctrl</span></div>';
   document.querySelector('.keyboard-box').innerHTML = out;
 }
-
 drawKeyboard();
+
+// Animation key keyboard
+document.addEventListener('keydown', function (event) {
+  let eventCode = event.code;
+  let keyClass = document.querySelector(`.${eventCode}`).classList;
+  if (keyClass.contains('keyboard-key')) {
+    keyClass.add('active');
+  } else {
+    keyClass.add('active');
+  }
+
+  document.addEventListener('keyup', function () {
+    if (keyClass.contains('keyboard-key')) {
+      keyClass.remove('active');
+    } else {
+      keyClass.remove('active');
+    }
+  });
+});
