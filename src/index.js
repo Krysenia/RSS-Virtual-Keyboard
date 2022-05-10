@@ -128,3 +128,5 @@ document.addEventListener('keydown', function (event) {
     }
   });
 });
+
+// Add UpperCase key
