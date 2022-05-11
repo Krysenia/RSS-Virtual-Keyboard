@@ -110,23 +110,56 @@ function drawKeyboard() {
 }
 drawKeyboard();
 
+const keyboardKey = document.querySelectorAll('.keyboard-key');
+const keyCapsLock = document.querySelector('.CapsLock');
+
 // Animation key keyboard
 document.addEventListener('keydown', function (event) {
   let eventCode = event.code;
-  let keyClass = document.querySelector(`.${eventCode}`).classList;
-  if (keyClass.contains('keyboard-key')) {
-    keyClass.add('active');
-  } else {
-    keyClass.add('active');
+  if (eventCode === 'CapsLock') {
+    onCaps();
   }
-
-  document.addEventListener('keyup', function () {
+  if (eventCode !== 'CapsLock') {
+    let keyClass = document.querySelector(`.${eventCode}`).classList;
     if (keyClass.contains('keyboard-key')) {
-      keyClass.remove('active');
+      keyClass.add('active');
     } else {
-      keyClass.remove('active');
+      keyClass.add('active');
     }
-  });
+
+    document.addEventListener('keyup', function () {
+      if (keyClass.contains('keyboard-key')) {
+        keyClass.remove('active');
+      } else {
+        keyClass.remove('active');
+      }
+    });
+  }
 });
 
-// Add UpperCase key
+// Animation key CapsLock
+function onCaps() {
+  if (document.querySelector('.CapsLock').classList.contains('active')) {
+    document.querySelector('.CapsLock').classList.remove('active');
+    capsLock();
+  } else {
+    document.querySelector('.CapsLock').classList.add('active');
+    capsLock();
+  }
+}
+
+// Function key CapsLock
+function capsLock() {
+  for (let i = 15; i < 50; i++) {
+    if (i === 28 || i === 29 || i === 41 || i === 42) {
+    } else {
+      if (keyCapsLock.classList.contains('active')) {
+        keyboardKey[i].innerHTML = keyboardKey[i].innerHTML.toUpperCase();
+      } else {
+        keyboardKey[i].innerHTML = keyboardKey[i].innerHTML.toLowerCase();
+      }
+    }
+  }
+}
+
+document.querySelector('.CapsLock').addEventListener('click', onCaps);
