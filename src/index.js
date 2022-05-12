@@ -271,6 +271,7 @@ document.querySelector('.ShiftLeft').addEventListener('mouseup', offShift);
 document.querySelector('.ShiftRight').addEventListener('mouseup', offShift);
 
 // Touch symbol press
+textarea.addEventListener('blur', () => textarea.focus());
 let text = [];
 function pressSymbol(e) {
   for (let i = 0; i < 48; i++) {
