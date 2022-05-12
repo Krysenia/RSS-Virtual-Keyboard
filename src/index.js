@@ -16,58 +16,57 @@ const keyboard = [
   96, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, 113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 91, 93, 92, 97,
   115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 32,
 ];
+const addClassKeyboardKey = [
+  'Backquote',
+  'Digit1',
+  'Digit2',
+  'Digit3',
+  'Digit4',
+  'Digit5',
+  'Digit6',
+  'Digit7',
+  'Digit8',
+  'Digit9',
+  'Digit0',
+  'Minus',
+  'Equal',
+  'KeyQ',
+  'KeyW',
+  'KeyE',
+  'KeyR',
+  'KeyT',
+  'KeyY',
+  'KeyU',
+  'KeyI',
+  'KeyO',
+  'KeyP',
+  'BracketLeft',
+  'BracketRight',
+  'Backslash',
+  'KeyA',
+  'KeyS',
+  'KeyD',
+  'KeyF',
+  'KeyG',
+  'KeyH',
+  'KeyJ',
+  'KeyK',
+  'KeyL',
+  'Semicolon',
+  'Quote',
+  'KeyZ',
+  'KeyX',
+  'KeyC',
+  'KeyV',
+  'KeyB',
+  'KeyN',
+  'KeyM',
+  'Comma',
+  'Period',
+  'Slash',
+  'Space',
+];
 function drawKeyboard() {
-  const addClassKeyboardKey = [
-    'Backquote',
-    'Digit1',
-    'Digit2',
-    'Digit3',
-    'Digit4',
-    'Digit5',
-    'Digit6',
-    'Digit7',
-    'Digit8',
-    'Digit9',
-    'Digit0',
-    'Minus',
-    'Equal',
-    'KeyQ',
-    'KeyW',
-    'KeyE',
-    'KeyR',
-    'KeyT',
-    'KeyY',
-    'KeyU',
-    'KeyI',
-    'KeyO',
-    'KeyP',
-    'BracketLeft',
-    'BracketRight',
-    'Backslash',
-    'KeyA',
-    'KeyS',
-    'KeyD',
-    'KeyF',
-    'KeyG',
-    'KeyH',
-    'KeyJ',
-    'KeyK',
-    'KeyL',
-    'Semicolon',
-    'Quote',
-    'KeyZ',
-    'KeyX',
-    'KeyC',
-    'KeyV',
-    'KeyB',
-    'KeyN',
-    'KeyM',
-    'Comma',
-    'Period',
-    'Slash',
-    'Space',
-  ];
-
   let out = '';
   for (let i = 0; i < keyboard.length; i++) {
     if (i === 13) {
@@ -107,6 +106,7 @@ function drawKeyboard() {
 }
 drawKeyboard();
 
+const textarea = document.querySelector('.textarea');
 const body = document.querySelector('body');
 const key = document.querySelectorAll('.key');
 const keyboardKey = document.querySelectorAll('.keyboard-key');
@@ -133,16 +133,6 @@ document.addEventListener('keydown', function (event) {
   if (eventCode === 'CapsLock') {
     onCaps();
   }
-  // удалить можно
-  // if (
-  //   eventCode === 'ShiftLeft' &&
-  //   document.querySelector('.CapsLock').classList.contains('active') &&
-  //   document.querySelector('.ShiftLeft').classList.contains('off')
-  // ) {
-  //   document.querySelector('.ShiftLeft').classList.add('on');
-  //   document.querySelector('.ShiftLeft').classList.remove('off');
-  // }
-
   if (eventCode !== 'CapsLock') {
     let keyClass = document.querySelector(`.${eventCode}`).classList;
     if (keyClass.contains('keyboard-key')) {
@@ -153,15 +143,6 @@ document.addEventListener('keydown', function (event) {
       if (keyClass.contains('keyboard-key')) {
         keyClass.remove('active');
       }
-
-      // удалить можно
-      // if (
-      //   document.querySelector('.CapsLock').classList.contains('active') &&
-      //   document.querySelector('.ShiftLeft').classList.contains('on')
-      // ) {
-      //   document.querySelector('.ShiftLeft').classList.add('off');
-      //   document.querySelector('.ShiftLeft').classList.remove('on');
-      // }
     });
   }
 });
@@ -289,5 +270,47 @@ document.querySelector('.ShiftRight').addEventListener('mousedown', onShift);
 document.querySelector('.ShiftLeft').addEventListener('mouseup', offShift);
 document.querySelector('.ShiftRight').addEventListener('mouseup', offShift);
 
-// (eventCode === 'ShiftLeft' || eventCode === 'ShiftRight') &&
-// document.querySelector('.CapsLock').classList.contains('active')
+// Touch symbol press
+let text = [];
+function pressSymbol(e) {
+  for (let i = 0; i < 48; i++) {
+    if (e.code == addClassKeyboardKey[i]) {
+      text.push(key[i].innerHTML);
+    }
+  }
+  textarea.textContent = text.join('');
+  if (e.code == 'Tab') {
+    text.push('   ');
+  }
+  if (e.code == 'Backspace') {
+    text.pop();
+  }
+  if (e.code == 'Space') {
+    text.push(' ');
+  }
+}
+
+window.addEventListener('keydown', function (e) {
+  pressSymbol(e);
+});
+
+key.forEach((e, n) => {
+  e.addEventListener('mousedown', (event) => {
+    if (n >= 0) {
+      text.push(key[n].innerHTML);
+    }
+    textarea.textContent = text.join('');
+  });
+});
+
+keyboardKey.forEach((e, n) => {
+  e.addEventListener('mousedown', (event) => {
+    if (n == 13) {
+      text.pop();
+    }
+    if (n == 14) {
+      text.push('   ');
+    }
+    textarea.textContent = text.join('');
+  });
+});
